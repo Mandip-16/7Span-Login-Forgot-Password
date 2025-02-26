@@ -1,0 +1,22 @@
+Feb 24, 2025 4:48:44 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
+Feb 24, 2025 5:11:03 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
+Feb 24, 2025 5:11:14 PM com.auth.util.LoggerUtil logInfo
+INFO: OTP sent to user: public class MainApp {
+Feb 24, 2025 5:11:29 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
+Feb 24, 2025 5:11:44 PM com.auth.util.LoggerUtil logInfo
+INFO: OTP sent to user: user1@example.com
+Feb 24, 2025 5:19:05 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
+Feb 24, 2025 5:34:10 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
+Feb 24, 2025 5:34:22 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
+Feb 24, 2025 5:36:10 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
+Feb 24, 2025 5:37:13 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
+Feb 24, 2025 5:38:16 PM com.auth.util.LoggerUtil logInfo
+INFO: Application started
