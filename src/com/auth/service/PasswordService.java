@@ -1,5 +1,5 @@
 package com.auth.service;
 
 public interface PasswordService {
-    void resetPassword(String usernameOrEmail, String newPassword, String confirmPassword);
+    void resetPassword(String usernameOrEmail, String newPassword);
 }

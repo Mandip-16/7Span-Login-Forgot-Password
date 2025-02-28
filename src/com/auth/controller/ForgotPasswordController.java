@@ -1,6 +1,5 @@
 package com.auth.controller;
 
-import com.auth.exception.TooManyFailedAttemptsException;
 import com.auth.exception.UserNotFoundException;
 import com.auth.model.User;
 import com.auth.service.impl.AuthServiceImpl;
@@ -8,8 +7,6 @@ import com.auth.service.impl.AuthServiceImpl;
 import java.util.Scanner;
 
 public class ForgotPasswordController {
-    private String newPassword;
-    private String confirmPassword;
     private OTPController otpController;
     private PasswordController passwordController;
 
@@ -32,19 +29,22 @@ public class ForgotPasswordController {
             System.out.println(e.getMessage());
             return;
         }
-        if (user.isBlocked()) {
-            System.out.println("Account is now locked due to 3 invalid attempts.");
-            return;
-        }
-        try {
-            otpController.sendOTP(usernameOrEmail);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
+
+        // This condition is for blocked user from login so user can perform forgot password
+        if(user.getLoginAttempts() < 3 || user.getOtpAttempts() >= 3) {
+            if (user.isBlocked()) {
+                System.out.println("Account is now blocked due to 3 invalid attempts.");
+                return;
+            }
         }
 
+        // Handling send OTP
+        otpController.sendOTP(usernameOrEmail);
+
         boolean otpVerified = false;
-        for (int i = 1; i <= 3; i++) { // Allow 3 OTP attempts
+
+        // Allow 3 OTP attempts
+        for (int i = 1; i <= 3; i++) {
             System.out.println("Enter OTP (attempt " + i + "): ");
             String otp = scanner.nextLine();
 
@@ -62,6 +62,10 @@ public class ForgotPasswordController {
             System.out.println("Too many failed OTP attempts. Account is blocked.");
             return;
         }
+
+        String newPassword;
+        String confirmPassword;
+
         do {
             System.out.println("\nEnter New Password:");
             System.out.println("New Password: ");
@@ -73,6 +77,6 @@ public class ForgotPasswordController {
             }
         } while (!newPassword.equals(confirmPassword));
 
-            passwordController.resetPassword(usernameOrEmail, newPassword, confirmPassword);
+            passwordController.resetPassword(usernameOrEmail, newPassword);
     }
 }

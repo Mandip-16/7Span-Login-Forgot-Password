@@ -1,5 +1,8 @@
 package com.auth.controller;
 
+import com.auth.exception.InvalidPasswordException;
+import com.auth.exception.TooManyFailedAttemptsException;
+import com.auth.exception.UserNotFoundException;
 import com.auth.service.impl.AuthServiceImpl;
 
 public class AuthController {
@@ -9,8 +12,12 @@ public class AuthController {
     public void login(String usernameOrEmail, String password) {
         try {
             authService.login(usernameOrEmail, password);
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException(e.getMessage());
+        } catch (TooManyFailedAttemptsException e) {
+            throw new TooManyFailedAttemptsException(e.getMessage());
+        } catch (InvalidPasswordException e) {
+            throw new InvalidPasswordException(e.getMessage());
         }
     }
 }

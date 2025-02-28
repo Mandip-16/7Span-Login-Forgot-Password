@@ -30,11 +30,6 @@ public class AuthServiceImpl implements AuthService {
     public void login(String usernameOrEmail, String password) {
         User user = findUser(usernameOrEmail);
 
-        // Account already blocked
-        if (user.isBlocked()) {
-            throw new TooManyFailedAttemptsException("The account is locked due to too many failed attempts. Please reset your password.");
-        }
-
         // Password validation
         if (!user.getPassword().equals(password)) {
             user.setLoginAttempts(user.getLoginAttempts() + 1);
@@ -42,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
             // Account is blocked due to 3 or more wrong login attempts
             if (user.getLoginAttempts() >= 3) {
                 user.setBlocked(true); // Block account
-                throw new TooManyFailedAttemptsException("The account is locked after 3 invalid login attempts. Please reset your password.");
+                throw new TooManyFailedAttemptsException("The account is blocked after 3 invalid login attempts. Please reset your password.");
             }
 
             throw new InvalidPasswordException("Invalid password. Attempts remaining: " + (3 - user.getLoginAttempts()));

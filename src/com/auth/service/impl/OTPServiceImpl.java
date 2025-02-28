@@ -4,7 +4,7 @@ import com.auth.exception.InvalidPasswordException;
 import com.auth.exception.TooManyFailedAttemptsException;
 import com.auth.model.User;
 import com.auth.service.OTPService;
-import com.auth.util.InputUtil;
+import com.auth.utility.InputUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,6 @@ public class OTPServiceImpl implements OTPService {
     //OTP Send functionality
     @Override
     public void sendOTP(String usernameOrEmail) {
-        User user = authService.findUser(usernameOrEmail);
         String otp = InputUtil.generateOTP();
         otpStore.put(usernameOrEmail, otp);
 

@@ -27,11 +27,11 @@ public class MainApp {
             System.out.println("3. Exit");
             System.out.println("Enter choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
-                case 1 -> loginController.loginFlow(scanner); // Delegate to LoginController
-                case 2 -> forgotPasswordController.forgotPasswordFlow(scanner); // Delegate to ForgotPasswordController
+                case 1 -> loginController.loginFlow(scanner);
+                case 2 -> forgotPasswordController.forgotPasswordFlow(scanner);
                 case 3 -> {
                     System.out.println("Exiting... Goodbye!");
                     scanner.close();

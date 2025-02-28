@@ -27,6 +27,8 @@ public class LoginController {
             System.out.println(e.getMessage());
             return;
         }
+
+        // If account is already block
         if (user.isBlocked()) {
             System.out.println("Your account is blocked.");
             return;
@@ -41,9 +43,6 @@ public class LoginController {
                 return;
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                if (i == 2) {
-                    System.out.println("Account is now locked due to 3 invalid attempts. Please use Forgot Password to reset your account.");
-                }
             }
         }
     }
